@@ -1,0 +1,18 @@
+<header>
+  <h1>Todos</h1>
+</header>
+
+<input type="text" placeholder="What needs to be done?" class="new-todo" />
+
+<ol>
+  @for( todo of todos; track todo._id ) {
+  <li>
+    <input
+      type="checkbox"
+      [checked]="todo.completed"
+      (change)="toggle($event, todo)"
+    />
+    {{ todo.name }}
+  </li>
+  }
+</ol>
