@@ -6,7 +6,7 @@ import { InstructionsComponent } from './instructions/instructions.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, TodosComponent],
+  imports: [RouterOutlet, TodosComponent, InstructionsComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

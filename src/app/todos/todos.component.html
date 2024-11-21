@@ -2,17 +2,43 @@
   <h1>Todos</h1>
 </header>
 
-<input type="text" placeholder="What needs to be done?" class="new-todo" />
+<input
+  type="text"
+  placeholder="What needs to be done?"
+  class="new-todo"
+  [(ngModel)]="newTodoName"
+  (keyup.enter)="addTodo()"
+/>
 
-<ol>
-  @for( todo of todos; track todo._id ) {
-  <li>
-    <input
-      type="checkbox"
-      [checked]="todo.completed"
-      (change)="toggle($event, todo)"
-    />
-    {{ todo.name }}
+<ol class="todos-list">
+  @for( todo of filteredTodos; track todo._id ) {
+  <li class="todos-list-item">
+    <span>
+      <input
+        [id]="'checkbox_todo_' + todo._id"
+        type="checkbox"
+        [checked]="todo.completed"
+        (change)="toggle($event, todo)"
+      />
+      <label
+        [for]="'checkbox_todo_' + todo._id"
+        [ngClass]="{ done: todo.completed }"
+        >{{ todo.name }}</label
+      >
+    </span>
+    <button class="btn-delete-todo" (click)="deleteTodo(todo._id)">
+      &times;
+    </button>
   </li>
   }
 </ol>
+
+<div class="todos-status-and-filter-bar">
+  <div>{{ getNotCompletedCount() }} items left</div>
+  <div>
+    <button (click)="setFilterKey('all')">All</button>
+    <button (click)="setFilterKey('completed')">Completed</button>
+    <button (click)="setFilterKey('not completed')">Not Completed</button>
+  </div>
+  <button>Clear completed</button>
+</div>
